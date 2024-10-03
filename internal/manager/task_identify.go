@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/stashapp/stash/pkg/utils"
 	"strings"
 
 	"github.com/stashapp/stash/internal/identify"
@@ -76,6 +77,16 @@ func (j *IdentifyJob) Execute(ctx context.Context, progress *job.Progress) error
 
 			if scene == nil {
 				return fmt.Errorf("scene with id %d not found", id)
+			}
+
+			if utils.IsTrue(j.input.Options.SetSkipAlreadyIdentified) {
+				if !scene.StashIDs.Loaded() {
+					return fmt.Errorf("stashids not loaded")
+				}
+				if len(scene.StashIDs.List()) > 0 {
+					logger.Infof("scene with id %d skipped as already it already has a stashid.")
+					continue
+				}
 			}
 
 			j.identifyScene(ctx, scene, sources)

@@ -65,6 +65,7 @@ export const IdentifyDialog: React.FC<IIdentifyDialogProps> = ({
       includeMalePerformers: true,
       setCoverImage: true,
       setOrganized: false,
+      setSkipAlreadyIdentified: false,
       skipMultipleMatches: true,
       skipMultipleMatchTag: undefined,
       skipSingleNamePerformers: true,

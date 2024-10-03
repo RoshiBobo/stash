@@ -513,6 +513,7 @@
         "include_male_performers": "Include male performers",
         "set_cover_images": "Set cover images",
         "set_organized": "Set organised flag",
+        "set_skip_already_identified": "Skip scenes that have already been matched",
         "skip_multiple_matches": "Skip matches that have more than one result",
         "skip_multiple_matches_tooltip": "If this is not enabled and more than one result is returned, one will be randomly chosen to match",
         "skip_single_name_performers": "Skip single name performers with no disambiguation",

@@ -174,6 +174,22 @@ export const OptionsEditor: React.FC<IOptionsEditor> = ({
           defaultValue={defaultOptions?.setOrganized ?? undefined}
           {...checkboxProps}
         />
+        <ThreeStateBoolean
+          id="set-skip-already-identified"
+          value={
+            options.setSkipAlreadyIdentified === null ? undefined : options.setSkipAlreadyIdentified
+          }
+          setValue={(v) =>
+            setOptions({
+              setSkipAlreadyIdentified: v,
+            })
+          }
+          label={intl.formatMessage({
+            id: "config.tasks.identify.set_skip_already_identified",
+          })}
+          defaultValue={defaultOptions?.setSkipAlreadyIdentified ?? undefined}
+          {...checkboxProps}
+        />
       </Form.Group>
       <ThreeStateBoolean
         id="skip-multiple-match"

@@ -29,8 +29,9 @@ type MetadataOptions struct {
 	// any fields missing from here are defaulted to MERGE and createMissing false
 	FieldOptions []*FieldOptions `json:"fieldOptions"`
 	// defaults to true if not provided
-	SetCoverImage *bool `json:"setCoverImage"`
-	SetOrganized  *bool `json:"setOrganized"`
+	SetCoverImage            *bool `json:"setCoverImage"`
+	SetOrganized             *bool `json:"setOrganized"`
+	SetSkipAlreadyIdentified *bool `json:"setSkipAlreadyIdentified"`
 	// defaults to true if not provided
 	IncludeMalePerformers *bool `json:"includeMalePerformers"`
 	// defaults to true if not provided
