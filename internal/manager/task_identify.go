@@ -79,16 +79,6 @@ func (j *IdentifyJob) Execute(ctx context.Context, progress *job.Progress) error
 				return fmt.Errorf("scene with id %d not found", id)
 			}
 
-			if utils.IsTrue(j.input.Options.SetSkipAlreadyIdentified) {
-				if !scene.StashIDs.Loaded() {
-					return fmt.Errorf("stashids not loaded")
-				}
-				if len(scene.StashIDs.List()) > 0 {
-					logger.Infof("scene with id %d skipped as already it already has a stashid.")
-					continue
-				}
-			}
-
 			j.identifyScene(ctx, scene, sources)
 		}
 
@@ -147,6 +137,16 @@ func (j *IdentifyJob) identifyScene(ctx context.Context, s *models.Scene, source
 	var taskError error
 	j.progress.ExecuteTask("Identifying "+s.Path, func() {
 		r := instance.Repository
+
+		var filteredSources []identify.ScraperSource
+		for _, source := range sources {
+			if utils.IsTrue(source.Options.SetSkipAlreadyIdentified) && len(s.StashIDs.List()) > 0 {
+				// we skip entry
+				continue
+			}
+			filteredSources = append(filteredSources, source)
+		}
+
 		task := identify.SceneIdentifier{
 			TxnManager:         r.TxnManager,
 			SceneReaderUpdater: r.Scene,
@@ -155,7 +155,7 @@ func (j *IdentifyJob) identifyScene(ctx context.Context, s *models.Scene, source
 			TagFinderCreator:   r.Tag,
 
 			DefaultOptions:              j.input.Options,
-			Sources:                     sources,
+			Sources:                     filteredSources,
 			SceneUpdatePostHookExecutor: j.postHookExecutor,
 		}
 
