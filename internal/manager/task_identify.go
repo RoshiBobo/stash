@@ -140,11 +140,16 @@ func (j *IdentifyJob) identifyScene(ctx context.Context, s *models.Scene, source
 
 		var filteredSources []identify.ScraperSource
 		for _, source := range sources {
-			if utils.IsTrue(source.Options.SetSkipAlreadyIdentified) && len(s.StashIDs.List()) > 0 {
-				// we skip entry
-				continue
+			if utils.IsTrue(j.input.Options.SkipAlreadyOrganized) || utils.IsTrue(source.Options.SkipAlreadyOrganized) {
+				if s.Organized {
+					continue
+				}
 			}
 			filteredSources = append(filteredSources, source)
+		}
+
+		if len(filteredSources) == 0 {
+			return
 		}
 
 		task := identify.SceneIdentifier{

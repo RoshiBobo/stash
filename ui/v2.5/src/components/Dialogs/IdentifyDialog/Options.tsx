@@ -177,17 +177,17 @@ export const OptionsEditor: React.FC<IOptionsEditor> = ({
         <ThreeStateBoolean
           id="set-skip-already-identified"
           value={
-            options.setSkipAlreadyIdentified === null ? undefined : options.setSkipAlreadyIdentified
+            options.skipAlreadyOrganized === null ? undefined : options.skipAlreadyOrganized
           }
           setValue={(v) =>
             setOptions({
-              setSkipAlreadyIdentified: v,
+              skipAlreadyOrganized: v,
             })
           }
           label={intl.formatMessage({
             id: "config.tasks.identify.set_skip_already_identified",
           })}
-          defaultValue={defaultOptions?.setSkipAlreadyIdentified ?? undefined}
+          defaultValue={defaultOptions?.skipAlreadyOrganized ?? undefined}
           {...checkboxProps}
         />
       </Form.Group>

@@ -203,7 +203,7 @@ input IdentifyMetadataOptionsInput {
   "defaults to true if not provided"
   setCoverImage: Boolean
   setOrganized: Boolean
-  setSkipAlreadyIdentified: Boolean
+  skipAlreadyOrganized: Boolean
   "defaults to true if not provided"
   includeMalePerformers: Boolean
   "defaults to true if not provided"
