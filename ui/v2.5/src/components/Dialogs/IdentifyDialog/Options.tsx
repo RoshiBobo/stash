@@ -175,7 +175,7 @@ export const OptionsEditor: React.FC<IOptionsEditor> = ({
           {...checkboxProps}
         />
         <ThreeStateBoolean
-          id="set-skip-already-identified"
+          id="skip-already-organized"
           value={
             options.skipAlreadyOrganized === null ? undefined : options.skipAlreadyOrganized
           }
@@ -185,7 +185,7 @@ export const OptionsEditor: React.FC<IOptionsEditor> = ({
             })
           }
           label={intl.formatMessage({
-            id: "config.tasks.identify.set_skip_already_identified",
+            id: "config.tasks.identify.skip_already_organized",
           })}
           defaultValue={defaultOptions?.skipAlreadyOrganized ?? undefined}
           {...checkboxProps}
